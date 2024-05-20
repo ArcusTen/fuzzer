@@ -1,40 +1,46 @@
 # DNS Fuzzer
 
-A Python script for performing DNS queries, checking subdomains, brute forcing subdomains, attempting DNS zone transfer and conducting reverse DNS lookups.
+This Python script enables you to perform DNS queries, check subdomains, perform reverse DNS lookups, and query SRV records.
 
 ## Requirements
 
 - Python 3.x
 - `dnspython` library (install via `pip install dnspython` or use `pip install -r requirements.txt`)
 
-## Usage
-
-```bash
-python main.py [-h] [-d DOMAIN] [-s SUBDOMAINS_FILE] [-w WORDLIST] [-n NAMESERVER] [-i IP_ADDRESS]
-```
-
-## Options
-
-- `-h, --help`: Show the help message and exit.
-- `-d DOMAIN`, `--domain DOMAIN`: Domain to perform DNS queries on.
-- `-s SUBDOMAINS_FILE`, `--subdomains SUBDOMAINS_FILE`: File containing a list of subdomains.
-- `-w WORDLIST`, `--wordlist WORDLIST`: Wordlist for brute force subdomain enumeration.
-- `-n NAMESERVER`, `--nameserver NAMESERVER`: Nameserver for DNS zone transfer.
-- `-i IP_ADDRESS`, `--ip IP_ADDRESS`: IP address for reverse DNS lookup.
-
 ## Features
 
-- **Basic DNS Queries:** Perform basic DNS queries (A, AAAA, MX, NS, TXT, SRV) for a given domain.
-- **Check Subdomains:** Check the existence of subdomains of a given domain using a provided subdomains file.
-- **Brute Force Subdomains:** Brute force subdomains using a wordlist.
-- **Attempt DNS Zone Transfer:** Attempt DNS zone transfer using a specified nameserver.
-- **Reverse DNS Lookup:** Perform reverse DNS lookup for a given IP address.
+- **DNS Queries:** Resolve and print various DNS records for a given domain.
+- **Subdomain Checking:** Check the availability of subdomains from a provided list.
+- **Reverse DNS Lookup:** Perform a reverse DNS lookup for a given IP address.
+- **SRV Record Querying:** Query and print SRV records for a specific service, protocol, and domain.
 
-## Sample Command
+## Command Line Arguments
+- `-d`, `--domain`: Domain to perform DNS queries on.
+- `-s`, `--subdomains`: File containing a list of subdomains to check.
+- `--srv`: To get SRV Record in the format 'service:protocol:domain'.
+- `-i`, `--ip`: IP address for reverse DNS lookup.
 
-```bash
-python3 dns_fuzzer.py -d thecyberthesis.com -s domains.txt -w wordlist.txt -n ns1.thecyberthesis.com -i 89.117.139.205
-```
+## Example Usage
+1. Perform DNS queries on a domain:
+   ```bash
+   python main.py -d google.com
+   ```
+
+2. Check subdomains for a domain:
+   ```bash
+   python main.py -d thecyberthesis.com -s subdomains.txt
+   ```
+
+3. Perform a reverse DNS lookup for an IP address:
+   ```bash
+   python main.py -i 8.8.4.4
+   ```
+
+4. Query SRV records:
+   ```bash
+   python main.py --srv service:protocol:example.com
+   ```
+
 
 ## Dependencies
 
@@ -42,3 +48,4 @@ python3 dns_fuzzer.py -d thecyberthesis.com -s domains.txt -w wordlist.txt -n ns
 - `argparse`: Python library for parsing command-line arguments.
 - `socket`: Standard Python library for socket operations.
 - `subprocess`: Standard Python library for subprocess management.
+- `os`: Operating system's library to make syscalls.
